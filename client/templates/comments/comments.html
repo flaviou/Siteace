@@ -1,0 +1,28 @@
+<template name="comment_form">
+	<div id="website_form">
+		<div class="well">
+			<form class="js-save-comment-form">
+			  <div class="form-group">
+				<h3><span class="label label-warning {{gh_show_warning}} ">Sign in to post comment.</span></h3>
+			  </div>
+			  <div class="form-group">
+				<label for="comment">Your comment</label>
+				<textarea class="form-control" rows="5" id="comment" placeholder="Your comment" required="true" {{gh_disabled}}></textarea>
+			  </div>
+			  <button type="submit" class="btn btn-default js-save-comment-form" {{gh_disabled}}>Submit</button>
+			</form>
+		</div>
+	</div>
+</template>
+
+<!-- template that displays several comment items -->
+<template name="comment_list">
+	{{#each comments}}
+	{{>comment_item}}
+	{{/each}}
+</template>
+
+<template name="comment_item">
+		<i>"{{comment}}"</i>
+		<p>Posted on {{createdOn}} by {{gh_user_full_name createdBy}}</p>
+</template>

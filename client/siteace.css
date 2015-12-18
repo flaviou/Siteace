@@ -1,0 +1,15 @@
+/* CSS declarations go here */
+.hidden_div{
+	display:none;
+}
+
+.label-as-badge {
+	padding-right: .6em;
+	padding-left: .6em;
+	border-radius: 10rem;
+}
+
+.navbar-nav > li{
+  padding-left:30px;
+  padding-right:30px;
+}

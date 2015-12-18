@@ -1,0 +1,123 @@
+<template name="search_form">
+	<form class="nav navbar-nav navbar-form navbar-right js-search" role="search">
+		<div class="input-group">
+			<input type="text" class="form-control" placeholder="Search this site" id="keywords">
+			<span class="input-group-btn">
+				<button type="submit" class="btn btn-default">
+					<span class="glyphicon glyphicon-search"></span>
+				</button>
+			</span>
+		</div>
+	</form>
+</template>
+
+<template name="search_results_page">
+	{{> search_results}}
+	{{> suggested_results}}
+</template>
+
+<template name="search_results">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Search results</h3>
+		</div>
+		<div class="panel-body">
+			{{> search_result_list}}
+		</div>
+	</div>
+</template>
+
+<template name="suggested_results">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Suggested web-sites</h3>
+		</div>
+		<div class="panel-body">
+			{{> suggestion_result_list}}
+		</div>
+	</div>
+</template>
+
+<template name="search_result_list">
+	<h3><span class="label label-warning {{hasResults}}">No results</span></h3>
+	<ol>
+	{{#each results}}
+		{{>search_result_item}}
+	{{/each}}
+	</ol>
+</template>
+
+<template name="search_result_item">
+	<li>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<a href="{{url}}">{{title}}</a>
+			</div>
+			<div class="panel-body">
+				<p>
+					{{description}} 
+				</p>
+				<p>
+					Submitted on {{createdOn}} by {{gh_user_full_name createdBy}}.
+				</p>
+			</div>
+			<ul class="list-group">
+				<li class="list-group-item">
+					Upvotes: <span class="label-as-badge label-success">{{gh_upvote_count _id}}</span> 
+				</li>
+				<li class="list-group-item">
+					Downvotes: <span class="label-as-badge label-danger">{{gh_downvote_count _id}}</span>
+				</li>
+			
+				<li class="list-group-item">
+					Comments: 
+					<a href="/website/{{_id}}" >
+						<button class="btn btn-primary" type="button"><span class="badge">{{gh_comment_count _id}}</span> Add / View Comment(s) </button>
+					</a>
+				</li>
+			</ul>
+		</div>	
+	</li>
+</template>
+
+<template name="suggestion_result_list">
+	<h3><span class="label label-warning {{hasResults}}">No results</span></h3>
+	<ol>
+	{{#each results}}
+		{{>search_result_item}}
+	{{/each}}
+	</ol>
+</template>
+
+<template name="suggestion_result_item">
+	<li>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<a href="{{url}}">{{title}}</a>
+			</div>
+			<div class="panel-body">
+				<p>
+					{{description}} 
+				</p>
+				<p>
+					Submitted on {{createdOn}} by {{gh_user_full_name createdBy}}.
+				</p>
+			</div>
+			<ul class="list-group">
+				<li class="list-group-item">
+					Upvotes: <span class="label-as-badge label-success">{{gh_upvote_count _id}}</span> 
+				</li>
+				<li class="list-group-item">
+					Downvotes: <span class="label-as-badge label-danger">{{gh_downvote_count _id}}</span>
+				</li>
+			
+				<li class="list-group-item">
+					Comments: 
+					<a href="/website/{{_id}}" >
+						<button class="btn btn-primary" type="button"><span class="badge">{{gh_comment_count _id}}</span> Add / View Comment(s) </button>
+					</a>
+				</li>
+			</ul>
+		</div>	
+	</li>
+</template>

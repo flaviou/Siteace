@@ -1,0 +1,98 @@
+<template name="websites">
+	<div class="container">
+		{{> website_form}}
+		{{> website_list}}
+	</div>
+</template>
+<template name="website_form">
+	<a class="btn btn-default js-toggle-website-form" id="btn-plus" href="#">
+  		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+	</a>
+	<div id="website_form" class="hidden_div">
+		<div class="well">
+			<form class="js-save-website-form">
+			  <div class="form-group">
+				<h3><span class="label label-warning {{gh_show_warning}} ">Sign in to post new web-site.</span></h3>
+			  </div>
+			  <div class="form-group">
+				<label for="url">Site address</label>
+				<input type="url" class="form-control" id="url" placeholder="http://www.mysite.com" required="true" {{gh_disabled}}>
+			  </div>
+			  <button type="submit" class="btn btn-default js-save-website-form" {{gh_disabled}}>Submit</button>
+			</form>
+		</div>
+	</div>
+</template>
+
+<!-- template that displays several website items -->
+<template name="website_list">
+	<ol>
+	{{#each websites}}
+	{{>website_item}}
+	{{/each}}
+	</ol>
+</template>
+
+<!-- template that displays individual website entries -->
+<template name="website_item">
+	<li>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<a href="{{url}}">{{title}}</a>
+			</div>
+			<div class="panel-body">
+				<p>
+					{{description}} 
+				</p>
+				<p>
+					Submitted on {{createdOn}} by {{gh_user_full_name createdBy}}.
+				</p>
+			</div>
+			<ul class="list-group">
+				<li class="list-group-item">
+					Upvotes: <span class="label-as-badge label-success">{{gh_upvote_count _id}}</span> 
+					<a href="#" class="btn btn-default js-upvote" data-toggle="popover" title="{{popup_msg}}" data-trigger="hover" {{gh_disabled}}>
+						<span class="glyphicon glyphicon-arrow-up"></span>
+					</a>
+				</li>
+				<li class="list-group-item">
+					Downvotes: <span class="label-as-badge label-danger">{{gh_downvote_count _id}}</span>
+					<a href="#" class="btn btn-default js-downvote" data-toggle="popover" title="{{popup_msg}}" data-trigger="hover" {{gh_disabled}}>
+						<span class="glyphicon glyphicon-arrow-down"></span>
+					</a>
+				</li>
+				<li class="list-group-item">
+					Comments: 
+					<a href="/website/{{_id}}" >
+						<button class="btn btn-primary" type="button"><span class="badge">{{gh_comment_count _id}}</span> Add / View Comment(s) </button>
+					</a>
+				</li>
+			</ul>
+		</div>	
+	</li>
+</template>
+
+<template name="website_detail">
+<div class="well">
+		<a href="{{url}}">{{title}}</a>
+		<p>
+			{{description}} 
+		</p>
+		<p>
+			Added on {{createdOn}}
+		</p>
+		<p>
+			Upvotes: <span class="label-as-badge label-success">{{gh_upvote_count _id}}</span> 
+			Downvotes: <span class="label-as-badge label-danger">{{gh_downvote_count _id}}</span>
+		</p>
+		<a href="#" class="btn btn-default js-upvote" data-toggle="popover" title="{{popup_msg}}" data-trigger="hover" {{gh_disabled}}>
+			<span class="glyphicon glyphicon-arrow-up"></span>
+		</a>
+		<a href="#" class="btn btn-default js-downvote" data-toggle="popover" title="{{popup_msg}}" data-trigger="hover" {{gh_disabled}}>
+			<span class="glyphicon glyphicon-arrow-down"></span>
+		</a>
+		{{> comment_form _id}}
+		{{> comment_list _id}}
+</div>	
+</template>
+
